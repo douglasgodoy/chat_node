@@ -1,6 +1,10 @@
-export default class Utils {
-    formatDate(): any {
-        const date  = new Date().setHours(new Date().getHours() - 3)
-        return new Date(date).toISOString().replace(/T/, " ").replace(/\..+/, "");
+import Logger from "./logger";
+
+export default class Utils extends Logger {
+    res(req: any) {
+        const { path } = req;
+        const method = req.stack[0].method
+
+        this.info(`${method.toUpperCase()}: ${path}`);
     }
 }

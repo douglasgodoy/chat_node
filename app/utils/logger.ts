@@ -1,16 +1,15 @@
 import * as fs from "fs";
-import Utils from './index'
-export default class Logger{
-    utils:Utils;
+export default class Logger {
 
-    constructor(){
-        this.utils = new Utils();
+    formatDate(): String {
+        const date = new Date().setHours(new Date().getHours() - 3)
+        return new Date(date).toISOString().replace(/T/, " ").replace(/\..+/, "");
     }
 
     save(type: string, message: string, cb: void | boolean) {
         fs.appendFile(
             "./error.log",
-            `\n\t{ ${type}: ${message}, date: ${this.utils.formatDate()} }`,
+            `\n\t{ ${type}: ${message}, date: ${this.formatDate()} }`,
             () => cb
         );
     }
@@ -35,7 +34,7 @@ export default class Logger{
             msg,
             console.log(
                 process.env.NODE_ENV === "production"
-                    ? `sorry, error detected....`
+                    ? `sorry, error detected...`
                     : `error: ${msg.toUpperCase()}`
             )
         );
