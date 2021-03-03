@@ -4,3 +4,5 @@ build
 error.log
 yarn**
 settings.json
+.dccache
+package-lock.json
